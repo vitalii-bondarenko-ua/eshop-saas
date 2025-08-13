@@ -1,5 +1,7 @@
-import express from 'express';
+import { errorMiddleware } from '@eshop-saas/middleware/error-handler';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import express from 'express';
 
 const app = express();
 
@@ -9,6 +11,11 @@ app.use(
     allowedHeaders: ['Authorization', 'Content-Type'],
   })
 );
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.use(errorMiddleware);
 
 app.get('/', (req, res) => {
   res.send({ message: 'Hello API' });
