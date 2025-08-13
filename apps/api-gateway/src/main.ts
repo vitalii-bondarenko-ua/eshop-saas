@@ -1,9 +1,9 @@
-import express from 'express';
-import cors from 'cors';
-import proxy from 'express-http-proxy';
-import morgan from 'morgan';
-import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express from 'express';
+import proxy from 'express-http-proxy';
+import rateLimit from 'express-rate-limit';
+import morgan from 'morgan';
 
 const app = express();
 
