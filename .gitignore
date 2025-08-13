@@ -46,3 +46,7 @@ Thumbs.db
 test-output
 
 error.log
+
+.env
+
+/generated/prisma
