@@ -21,13 +21,13 @@ app.set('trust proxy', 1);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: (req: any) => (req.user ? 1000 : 100),
+  limit: (req: express.Request & { user?: unknown }) => (req.user ? 1000 : 100),
   message: {
     error: 'Too many requests, please try again later!',
   },
   standardHeaders: true,
   legacyHeaders: true,
-  keyGenerator: (req: any) => req.ip,
+  keyGenerator: (req: express.Request) => req.ip || 'unknown',
 });
 
 app.use(limiter);
