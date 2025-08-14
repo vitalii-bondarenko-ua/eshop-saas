@@ -43,8 +43,6 @@ export const sendEmail = async (
   try {
     const html = await renderEmailTemplate(templateName, data);
 
-    console.log({ html });
-
     await transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
