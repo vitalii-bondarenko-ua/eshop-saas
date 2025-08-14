@@ -19,7 +19,8 @@
     "target": "es2022",
     "customConditions": ["development"],
     "paths": {
-      "@eshop-saas/*": ["packages/*"]
+      "@eshop-saas/*": ["packages/*"],
+      "@eshop-saas/generated/prisma": ["generated/prisma"]
     }
   }
 }
