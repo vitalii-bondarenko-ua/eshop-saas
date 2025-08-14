@@ -1,7 +1,6 @@
 import { redis } from '@eshop-saas/libs/redis';
 import { ValidationError } from '@eshop-saas/middleware/error-handler';
 import crypto from 'crypto';
-import { NextFunction } from 'express';
 import { sendEmail } from './sendMail';
 
 type RegistrationInput = {
@@ -35,44 +34,35 @@ export const validateRegistrationData = (
   }
 };
 
-export const checkOtpRestrictions = async (
-  email: string,
-  next: NextFunction
-) => {
+export const checkOtpRestrictions = async (email: string) => {
   if (await redis.get(`otp_lock:${email}`)) {
-    return next(
-      new ValidationError(
-        'Account locked dut to multiple failed attempts! Try again after 30 minutes.'
-      )
+    throw new ValidationError(
+      'Account locked dut to multiple failed attempts! Try again after 30 minutes.'
     );
   }
 
   if (await redis.get(`otp_spam_lock:${email}`)) {
-    return next(
-      new ValidationError(
-        'Too many OTP requests! Please wati 1 hour before requesting again.'
-      )
+    throw new ValidationError(
+      'Too many OTP requests! Please wati 1 hour before requesting again.'
     );
   }
 
   if (await redis.get(`otp_cooldown:${email}`)) {
-    return next(
-      new ValidationError('Please wait 1 minute before requesting a new OTP!')
+    throw new ValidationError(
+      'Please wait 1 minute before requesting a new OTP!'
     );
   }
 };
 
-export const trackOtpRequests = async (email: string, next: NextFunction) => {
+export const trackOtpRequests = async (email: string) => {
   const otpRequestKey = `otp_request_count:${email}`;
   const otpRequests = parseInt((await redis.get(otpRequestKey)) || '0');
 
   if (otpRequests >= 2) {
     await redis.set(`otp_spam_lock:${email}`, 'locked', 'EX', 3600);
 
-    return next(
-      new ValidationError(
-        'Too many OTP requests! Please wati 1 hour before requesting again.'
-      )
+    throw new ValidationError(
+      'Too many OTP requests! Please wati 1 hour before requesting again.'
     );
   }
 

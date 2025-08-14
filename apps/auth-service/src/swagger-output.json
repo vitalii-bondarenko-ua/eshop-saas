@@ -9,7 +9,7 @@
   "basePath": "/",
   "schemes": ["http"],
   "paths": {
-    "/user-registration": {
+    "/api/user-registration": {
       "post": {
         "description": "",
         "parameters": [
@@ -24,6 +24,9 @@
                 },
                 "email": {
                   "example": "jhon.due@gmail.com"
+                },
+                "password": {
+                  "example": "123456"
                 }
               }
             }

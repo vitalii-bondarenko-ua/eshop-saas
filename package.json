@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "npx nx run-many --target=serve --all",
+    "dev": "npx nx run-many --target=serve --projects=auth-service,api-gateway",
+    "dev:auth": "npx nx serve auth-service",
+    "dev:gateway": "npx nx serve api-gateway",
     "prisma:generate": "npx prisma generate"
   },
   "private": true,
