@@ -31,7 +31,7 @@ const renderEmailTemplate = async (
     `${templateName}.ejs`
   );
 
-  return ejs.render(templatePath, data);
+  return ejs.renderFile(templatePath, data);
 };
 
 export const sendEmail = async (
@@ -42,6 +42,8 @@ export const sendEmail = async (
 ): Promise<boolean> => {
   try {
     const html = await renderEmailTemplate(templateName, data);
+
+    console.log({ html });
 
     await transporter.sendMail({
       from: process.env.SMTP_USER,
