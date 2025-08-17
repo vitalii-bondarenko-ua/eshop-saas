@@ -21,8 +21,8 @@ model users {
   name      String
   email     String   @unique
   password  String?
-  following String[]
+  following String[] @default([])
   avatar    images?
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @default(now())
 }
