@@ -77,8 +77,5 @@
   },
   "workspaces": [
     "apps/*"
-  ],
-  "lint-staged": {
-    "*": "yarn format"
-  }
+  ]
 }

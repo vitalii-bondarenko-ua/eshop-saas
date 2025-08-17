@@ -29,8 +29,6 @@ app.get('/docs-json', (req, res) => {
 
 app.use('/api', authRouter);
 
-const a = b;
-
 app.use(errorMiddleware);
 
 const port = process.env.PORT || 6001;
