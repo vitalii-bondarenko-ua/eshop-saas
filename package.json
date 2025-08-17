@@ -10,7 +10,8 @@
     "prepare": "husky install",
     "lint": "eslint . --fix",
     "prettier": "prettier . --write",
-    "format": "yarn prettier && yarn lint"
+    "format": "yarn prettier && yarn lint",
+    "auth-docs": "node apps/auth-service/src/swagger.mjs"
   },
   "private": true,
   "dependencies": {
