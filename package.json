@@ -6,7 +6,11 @@
     "dev": "npx nx run-many --target=serve --projects=auth-service,api-gateway",
     "dev:auth": "npx nx serve auth-service",
     "dev:gateway": "npx nx serve api-gateway",
-    "prisma:generate": "npx prisma generate"
+    "prisma:generate": "npx prisma generate",
+    "prepare": "husky install",
+    "lint": "eslint . --fix",
+    "prettier": "prettier . --write",
+    "format": "yarn prettier && yarn lint"
   },
   "private": true,
   "dependencies": {
@@ -55,9 +59,11 @@
     "esbuild": "^0.19.2",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
+    "husky": ">=6",
     "jest": "^30.0.2",
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
+    "lint-staged": ">=10",
     "nx": "21.3.5",
     "prettier": "^2.6.2",
     "prettier-plugin-prisma": "^5.0.0",
@@ -71,5 +77,8 @@
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "lint-staged": {
+    "*": "yarn format"
+  }
 }
