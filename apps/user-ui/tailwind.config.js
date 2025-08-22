@@ -1,3 +1,5 @@
+const { styles } = require('./src/brandConfig');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -71,7 +73,13 @@ module.exports = {
       '4/5': '80%',
       ...theme('spacing'),
     }),
-    extend: {},
+    extend: {
+      fontFamily: {
+        Roboto: ['var(--font-roboto)'],
+        Poppins: ['var(--font-poppins)'],
+      },
+      colors: styles.colors,
+    },
   },
   plugins: [],
 };
