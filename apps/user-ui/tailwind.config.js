@@ -79,6 +79,12 @@ module.exports = {
         Poppins: ['var(--font-poppins)'],
       },
       colors: styles.colors,
+      zIndex: {
+        1: '1',
+        2: '2',
+        100: '100',
+        loader: '999',
+      },
     },
   },
   plugins: [],
