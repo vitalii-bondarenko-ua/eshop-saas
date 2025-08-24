@@ -9,14 +9,14 @@ import { AppLink, emailRegex } from '../../config/constants';
 import { GoogleButton } from '../GoogleButton';
 
 type FormData = {
+  name: string;
   email: string;
   password: string;
 };
 
-export const LoginForm = () => {
+export const SignUpForm = () => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
-  const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
 
   const {
@@ -32,20 +32,20 @@ export const LoginForm = () => {
   return (
     <div className="min-h-[85vh] w-full bg-gray-100 py-10">
       <h1 className="text-center font-Poppins text-4xl font-semibold text-black">
-        Login
+        Signup
       </h1>
       <p className="py-3 text-center text-lg font-medium text-gray-400">
-        Home . Login
+        Home . Signup
       </p>
       <div className="flex justify-center">
         <div className="rounded-lg bg-white p-8 shadow md:w-[480px]">
           <h3 className="mb-2 text-center text-3xl font-semibold">
-            Login to Eshop
+            Signup to Eshop
           </h3>
           <p className="mb-4 flex justify-center gap-1 text-center text-gray-500">
-            <span>Don&apos;t have an account</span>
-            <Link href={AppLink.Signup} className="text-blue-500">
-              Sign Up
+            <span>Already have an account</span>
+            <Link href={AppLink.Login} className="text-blue-500">
+              Login
             </Link>
           </p>
           <GoogleButton />
@@ -55,6 +55,23 @@ export const LoginForm = () => {
             <div className="flex-1 border-t border-gray-300" />
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-2">
+              <label htmlFor="name" className="mb-1 block text-gray-600">
+                Name
+              </label>
+              <input
+                type="name"
+                id="name"
+                placeholder="Your name"
+                className="mb-1 w-full !rounded border border-gray-300 p-2 outline-none"
+                {...register('name', {
+                  required: 'Name is required',
+                })}
+              />
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email.message}</p>
+              )}
+            </div>
             <div className="mb-2">
               <label htmlFor="email" className="mb-1 block text-gray-600">
                 Email
@@ -76,7 +93,7 @@ export const LoginForm = () => {
                 <p className="text-sm text-red-500">{errors.email.message}</p>
               )}
             </div>
-            <div className="mb-2">
+            <div className="mb-4">
               <label htmlFor="password" className="mb-1 block text-gray-600">
                 Password
               </label>
@@ -108,29 +125,11 @@ export const LoginForm = () => {
                 </p>
               )}
             </div>
-            <div className="mb-4 flex items-center justify-between">
-              <label htmlFor="remember-me" className="mb-1 block text-gray-600">
-                <input
-                  type="checkbox"
-                  id="remember-me"
-                  className="mr-2"
-                  checked={rememberMe}
-                  onChange={() => setRememberMe((prev) => !prev)}
-                />
-                Remember me
-              </label>
-              <Link
-                href={AppLink.ForgotPassword}
-                className="text-sm text-blue-500"
-              >
-                Forgot password?
-              </Link>
-            </div>
             <button
               type="submit"
               className="w-full cursor-pointer rounded-lg bg-black py-2 text-lg text-white"
             >
-              Login
+              Signup
             </button>
             {serverError && (
               <p className="mt-2 text-sm text-red-500">{serverError}</p>
