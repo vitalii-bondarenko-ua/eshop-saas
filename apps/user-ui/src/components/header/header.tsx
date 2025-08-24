@@ -2,12 +2,12 @@ import { Search } from 'lucide-react';
 import Link from 'next/link';
 import { AppLink } from '../../config/constants';
 import { styles } from '../../config/styles';
-import { HeaderActions } from '../components';
+import { HeaderActions } from './header-actions';
 import { HeaderBottom } from './header-bottom';
 
 export const Header = () => {
   return (
-    <div className="w-full bg-white">
+    <header className="w-full bg-white">
       <div className="m-auto flex w-4/5 items-center justify-between py-5">
         <div>
           <Link href={AppLink.Home}>
@@ -29,6 +29,6 @@ export const Header = () => {
       </div>
       <div className="border-b border-b-slate-200" />
       <HeaderBottom />
-    </div>
+    </header>
   );
 };

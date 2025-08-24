@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { navItems } from '../../config/constants';
 import { styles } from '../../config/styles';
-import { HeaderActions } from '../components';
+import { HeaderActions } from './header-actions';
 
 const { colors } = styles;
 
@@ -63,7 +63,7 @@ export const HeaderBottom = () => {
         {show && (
           <div
             className={cn(
-              'absolute left-0 h-[400px] w-[260px] bg-gray-100',
+              'absolute left-0 h-[400px] w-[260px] bg-gray-200',
               isSticky ? 'top-18' : 'top-12'
             )}
           >

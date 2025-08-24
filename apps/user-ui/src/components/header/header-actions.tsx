@@ -1,7 +1,7 @@
+import cn from 'classnames';
+import { HeartIcon, ShoppingCart, User } from 'lucide-react';
 import Link from 'next/link';
 import { AppLink } from '../../config/constants';
-import { HeartIcon, ShoppingCart, User } from 'lucide-react';
-import cn from 'classnames';
 
 export const HeaderActions = () => {
   return (

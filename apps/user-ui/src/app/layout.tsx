@@ -1,6 +1,6 @@
 import { Poppins, Roboto } from 'next/font/google';
+import { Header } from '../components';
 import './global.css';
-import { Header } from '../shared/widgets';
 
 export const metadata = {
   title: 'Eshop',

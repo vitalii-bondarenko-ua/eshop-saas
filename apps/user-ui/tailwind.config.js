@@ -1,4 +1,4 @@
-const { styles } = require('./src/brandConfig');
+const { styles } = require('./src/config/styles');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
