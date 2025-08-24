@@ -2,8 +2,13 @@
 
 import cn from 'classnames';
 import { AlignLeft, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { styles } from '../../brandConfig';
+import { navItems } from '../../config/constants';
+import { styles } from '../../config/styles';
+import { HeaderActions } from '../components';
+
+const { colors } = styles;
 
 export const HeaderBottom = () => {
   const [show, setShow] = useState(false);
@@ -11,11 +16,18 @@ export const HeaderBottom = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.screenY > 100);
+      const y =
+        window.scrollY ??
+        window.pageYOffset ??
+        document.documentElement.scrollTop ??
+        0;
+
+      setIsSticky(y > 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -29,22 +41,19 @@ export const HeaderBottom = () => {
       <div
         className={cn(
           'relative m-auto flex w-4/5 items-center justify-between',
-          isSticky ? 'pt-3' : 'py-0'
+          isSticky ? 'py-3' : 'py-0'
         )}
       >
         <div
-          className={cn(
-            'flex h-12 w-[260px] cursor-pointer items-center justify-between bg-accent-primary px-5',
-            isSticky && '-mb-2'
-          )}
+          className="flex h-12 w-[260px] cursor-pointer items-center justify-between bg-accent-primary px-5"
           onClick={() => setShow((prev) => !prev)}
         >
           <div className="flex items-center gap-2">
-            <AlignLeft color={styles.colors.basic.white} />
+            <AlignLeft color={colors.basic.white} />
             <span className="font-medium text-white">All Departments</span>
           </div>
           <ChevronDown
-            color={styles.colors.basic.white}
+            color={colors.basic.white}
             className={cn(
               'transition-transform duration-300',
               show && 'rotate-180'
@@ -61,6 +70,18 @@ export const HeaderBottom = () => {
             Dropdowns
           </div>
         )}
+        <div className="flex items-center">
+          {navItems.map((item: NavItemsTypes) => (
+            <Link
+              href={item.href}
+              key={item.href}
+              className="px-5 text-lg font-medium"
+            >
+              {item.title}
+            </Link>
+          ))}
+        </div>
+        <div>{isSticky && <HeaderActions />}</div>
       </div>
     </div>
   );
